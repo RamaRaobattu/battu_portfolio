@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Battu Rama Rao | Java Developer</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --bg:#07090f;--surface:#0e1018;--card:#151720;--border:#1e2130;
+  --accent:#4f8ef7;--accent2:#38e2b0;--text:#eef0f8;--muted:#7880a0;
+  --font-head:'Syne',sans-serif;--font-body:'DM Sans',sans-serif;
+}
+body{background:var(--bg);color:var(--text);font-family:var(--font-body);overflow-x:hidden;}
+
+nav{position:sticky;top:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1rem 2.5rem;background:rgba(7,9,15,0.88);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);}
+.logo{font-family:var(--font-head);font-weight:800;font-size:1.2rem;letter-spacing:-0.02em;}
+.logo span{color:var(--accent);}
+.nav-links{display:flex;gap:1.8rem;}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:0.83rem;letter-spacing:0.05em;text-transform:uppercase;transition:color 0.2s;}
+.nav-links a:hover{color:var(--accent2);}
+
+.hero{min-height:92vh;display:flex;flex-direction:column;justify-content:center;padding:5rem 2.5rem;position:relative;overflow:hidden;}
+.dot-grid{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(78,120,230,0.18) 1px,transparent 1px);background-size:36px 36px;opacity:0.5;}
+.glow1{position:absolute;top:5%;left:15%;width:500px;height:500px;background:radial-gradient(circle,rgba(79,142,247,0.12) 0%,transparent 65%);pointer-events:none;}
+.glow2{position:absolute;bottom:5%;right:5%;width:350px;height:350px;background:radial-gradient(circle,rgba(56,226,176,0.09) 0%,transparent 65%);pointer-events:none;}
+.hero-inner{position:relative;z-index:1;max-width:820px;}
+.badge{display:inline-flex;align-items:center;gap:0.5rem;font-size:0.77rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent2);border:1px solid rgba(56,226,176,0.25);padding:0.3rem 1rem;border-radius:100px;margin-bottom:1.5rem;}
+.badge-dot{width:7px;height:7px;border-radius:50%;background:var(--accent2);animation:pulse 1.8s infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.3;}}
+.hero h1{font-family:var(--font-head);font-size:clamp(2.6rem,5.5vw,4.8rem);font-weight:800;line-height:1.06;letter-spacing:-0.03em;margin-bottom:0.5rem;}
+.hero h1 .name{color:var(--accent);}
+.hero h2{font-family:var(--font-head);font-size:clamp(1rem,2vw,1.4rem);font-weight:400;color:var(--muted);margin-bottom:1.2rem;}
+.hero p{font-size:1rem;color:var(--muted);max-width:540px;line-height:1.75;margin-bottom:2rem;}
+.btn-row{display:flex;gap:1rem;flex-wrap:wrap;}
+.btn{display:inline-block;padding:0.72rem 1.7rem;border-radius:8px;font-family:var(--font-head);font-weight:700;font-size:0.88rem;text-decoration:none;cursor:pointer;border:none;transition:all 0.2s;}
+.btn-primary{background:var(--accent);color:#fff;}
+.btn-primary:hover{background:#6fa3f9;transform:translateY(-2px);}
+.btn-outline{background:transparent;color:var(--text);border:1px solid var(--border);}
+.btn-outline:hover{border-color:var(--accent2);color:var(--accent2);}
+.hero-meta{display:flex;gap:2rem;margin-top:2.5rem;flex-wrap:wrap;}
+.hero-meta-item{display:flex;align-items:center;gap:0.5rem;font-size:0.83rem;color:var(--muted);}
+.hero-meta-item span{color:var(--text);}
+
+section{padding:5rem 2.5rem;}
+.sec-label{font-size:0.73rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent2);margin-bottom:0.6rem;}
+.sec-title{font-family:var(--font-head);font-size:clamp(1.7rem,3vw,2.5rem);font-weight:800;letter-spacing:-0.025em;margin-bottom:2.5rem;}
+.sec-title em{color:var(--accent);font-style:normal;}
+
+.about-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:3rem;align-items:start;}
+.about-text p{color:var(--muted);line-height:1.85;margin-bottom:1rem;font-size:0.95rem;}
+.info-cards{display:flex;flex-direction:column;gap:0.9rem;}
+.info-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.1rem 1.3rem;display:flex;gap:1rem;align-items:center;transition:border-color 0.2s;}
+.info-card:hover{border-color:var(--accent);}
+.info-icon{font-size:1.3rem;flex-shrink:0;}
+.info-label{font-size:0.73rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;}
+.info-val{font-size:0.9rem;font-weight:500;margin-top:0.15rem;}
+
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;}
+.skill-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.4rem;transition:all 0.2s;position:relative;overflow:hidden;}
+.skill-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--accent2));opacity:0;transition:opacity 0.2s;}
+.skill-card:hover{border-color:rgba(79,142,247,0.4);transform:translateY(-3px);}
+.skill-card:hover::after{opacity:1;}
+.sk-icon{font-size:1.5rem;margin-bottom:0.7rem;}
+.sk-name{font-family:var(--font-head);font-size:0.95rem;font-weight:700;margin-bottom:0.6rem;}
+.sk-tags{display:flex;flex-wrap:wrap;gap:0.35rem;}
+.tag{font-size:0.7rem;padding:0.2rem 0.55rem;border-radius:5px;background:rgba(79,142,247,0.1);color:var(--accent);border:1px solid rgba(79,142,247,0.18);}
+.tag.green{background:rgba(56,226,176,0.1);color:var(--accent2);border-color:rgba(56,226,176,0.2);}
+
+.project-card{background:var(--card);border:1px solid var(--border);border-radius:18px;overflow:hidden;max-width:860px;margin:0 auto;}
+.project-banner{height:200px;background:linear-gradient(135deg,#0b1428 0%,#0d2040 50%,#091830 100%);display:flex;align-items:center;justify-content:center;gap:2rem;}
+.banner-icon{font-size:3.5rem;}
+.banner-text h3{font-family:var(--font-head);font-size:1.5rem;font-weight:800;color:#fff;margin-bottom:0.3rem;}
+.banner-text p{font-size:0.85rem;color:rgba(255,255,255,0.5);}
+.project-body{padding:2rem;}
+.project-desc{color:var(--muted);line-height:1.8;font-size:0.94rem;margin-bottom:1.5rem;}
+.feature-list{display:grid;grid-template-columns:1fr 1fr;gap:0.6rem;margin-bottom:1.5rem;}
+.feature-item{display:flex;align-items:flex-start;gap:0.6rem;font-size:0.85rem;color:var(--muted);}
+.feature-dot{width:6px;height:6px;border-radius:50%;background:var(--accent2);margin-top:5px;flex-shrink:0;}
+.proj-stack{display:flex;flex-wrap:wrap;gap:0.4rem;margin-bottom:1.5rem;}
+.project-links{display:flex;gap:0.8rem;}
+.proj-btn{font-size:0.82rem;padding:0.5rem 1.2rem;border-radius:8px;text-decoration:none;border:1px solid var(--border);color:var(--muted);transition:all 0.2s;cursor:pointer;background:transparent;}
+.proj-btn:hover{border-color:var(--accent2);color:var(--accent2);}
+.proj-btn.primary{background:var(--accent);color:#fff;border-color:transparent;}
+.proj-btn.primary:hover{background:#6fa3f9;}
+
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;}
+.contact-desc{color:var(--muted);line-height:1.8;font-size:0.95rem;margin-bottom:1.8rem;}
+.clinks{display:flex;flex-direction:column;gap:0.85rem;}
+.clink{display:flex;align-items:center;gap:1rem;padding:0.9rem 1.2rem;background:var(--card);border:1px solid var(--border);border-radius:10px;text-decoration:none;color:var(--text);transition:all 0.2s;}
+.clink:hover{border-color:var(--accent2);color:var(--accent2);}
+.clink-ico{width:34px;height:34px;border-radius:8px;background:rgba(79,142,247,0.1);display:flex;align-items:center;justify-content:center;font-size:0.95rem;flex-shrink:0;}
+.clink-main{font-size:0.88rem;font-weight:500;}
+.clink-sub{font-size:0.73rem;color:var(--muted);margin-top:0.1rem;}
+.cform{display:flex;flex-direction:column;gap:0.9rem;}
+.cform input,.cform textarea{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:0.85rem 1rem;color:var(--text);font-family:var(--font-body);font-size:0.88rem;outline:none;transition:border-color 0.2s;resize:none;}
+.cform input::placeholder,.cform textarea::placeholder{color:var(--muted);}
+.cform input:focus,.cform textarea:focus{border-color:var(--accent);}
+.cform textarea{height:120px;}
+
+footer{text-align:center;padding:2rem;border-top:1px solid var(--border);color:var(--muted);font-size:0.8rem;}
+
+@media(max-width:680px){
+  nav{padding:0.9rem 1.2rem;}
+  .nav-links{gap:1rem;}
+  section,.hero{padding:3.5rem 1.2rem;}
+  .about-grid,.contact-grid{grid-template-columns:1fr;}
+  .feature-list{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">Rama<span>Rao</span>.dev</div>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#project">Project</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="dot-grid"></div>
+  <div class="glow1"></div>
+  <div class="glow2"></div>
+  <div class="hero-inner">
+    <div class="badge"><span class="badge-dot"></span>Open to Placements &amp; Internships</div>
+    <h1>Hi, I'm<br><span class="name">Battu Rama Rao</span></h1>
+    <h2>Java Full Stack Developer (Fresher)</h2>
+    <p>A passionate BTech student from Gudlavalleru, building robust backend systems with Java &amp; Spring Boot and exploring the full stack. Eager to contribute, learn fast, and grow with the right team.</p>
+    <div class="btn-row">
+      <a href="#project" class="btn btn-primary">View My Project</a>
+      <a href="#contact" class="btn btn-outline">Get In Touch</a>
+    </div>
+    <div class="hero-meta">
+      <div class="hero-meta-item">🎓 <span>SRGEC, Gudlavalleru</span></div>
+      <div class="hero-meta-item">📍 <span>Andhra Pradesh, India</span></div>
+      <div class="hero-meta-item">☕ <span>Java Enthusiast</span></div>
+    </div>
+  </div>
+</div>
+
+<section id="about">
+  <div class="sec-label">About Me</div>
+  <div class="sec-title">Who I <em>Am</em></div>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>I'm Battu Rama Rao, a 3rd year BTech student at Seshadri Rao Gudlavalleru Engineering College. My programming journey started with Core Java and I've since built a strong understanding of object-oriented concepts, collections, and database connectivity.</p>
+      <p>I'm currently expanding into Spring Boot to build real-world REST APIs, and sharpening my problem-solving skills through DSA practice. I'm highly motivated to land a placement and prove my abilities in a professional environment.</p>
+      <p>I believe in learning by building — every concept I study, I try to apply it in a project or code challenge.</p>
+    </div>
+    <div class="info-cards">
+      <div class="info-card">
+        <div class="info-icon">🎓</div>
+        <div>
+          <div class="info-label">College</div>
+          <div class="info-val">Seshadri Rao Gudlavalleru Engineering College</div>
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="info-icon">📚</div>
+        <div>
+          <div class="info-label">Year</div>
+          <div class="info-val">3rd Year, 2nd Semester · BTech</div>
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="info-icon">📧</div>
+        <div>
+          <div class="info-label">Email</div>
+          <div class="info-val">batturamarao33@gmail.com</div>
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="info-icon">📱</div>
+        <div>
+          <div class="info-label">Phone</div>
+          <div class="info-val">+91 93925 91707</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills" style="background:var(--surface);">
+  <div class="sec-label">Technical Skills</div>
+  <div class="sec-title">What I <em>Know</em></div>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <div class="sk-icon">☕</div>
+      <div class="sk-name">Core Java</div>
+      <div class="sk-tags">
+        <span class="tag">OOPs</span>
+        <span class="tag">Classes</span>
+        <span class="tag">Inheritance</span>
+        <span class="tag">Exception Handling</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="sk-icon">📦</div>
+      <div class="sk-name">Collections</div>
+      <div class="sk-tags">
+        <span class="tag">ArrayList</span>
+        <span class="tag">HashMap</span>
+        <span class="tag">LinkedList</span>
+        <span class="tag">Set</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="sk-icon">🗄️</div>
+      <div class="sk-name">Database</div>
+      <div class="sk-tags">
+        <span class="tag">SQL</span>
+        <span class="tag">MySQL</span>
+        <span class="tag">JDBC</span>
+        <span class="tag">Queries</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="sk-icon">🌱</div>
+      <div class="sk-name">Spring Boot</div>
+      <div class="sk-tags">
+        <span class="tag green">REST APIs</span>
+        <span class="tag green">Spring MVC</span>
+        <span class="tag green">Basic</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="sk-icon">🛠️</div>
+      <div class="sk-name">Tools</div>
+      <div class="sk-tags">
+        <span class="tag">Git</span>
+        <span class="tag">GitHub</span>
+        <span class="tag">Eclipse</span>
+        <span class="tag">VS Code</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="sk-icon">🧠</div>
+      <div class="sk-name">Currently Learning</div>
+      <div class="sk-tags">
+        <span class="tag green">React</span>
+        <span class="tag green">MongoDB</span>
+        <span class="tag green">DSA</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="project">
+  <div class="sec-label">Featured Project</div>
+  <div class="sec-title">What I've <em>Built</em></div>
+  <div class="project-card">
+    <div class="project-banner">
+      <div class="banner-icon">🎓</div>
+      <div class="banner-text">
+        <h3>Student Result Management System</h3>
+        <p>Java · Spring Boot · JDBC · MySQL</p>
+      </div>
+    </div>
+    <div class="project-body">
+      <p class="project-desc">A full-featured web application that allows students to register, login, and view their academic results, while administrators can manage student records, add marks, and generate performance reports. Built with a Spring Boot backend and MySQL database using JDBC.</p>
+      <div class="feature-list">
+        <div class="feature-item"><div class="feature-dot"></div>Student registration &amp; secure login</div>
+        <div class="feature-item"><div class="feature-dot"></div>Admin panel to add/update marks</div>
+        <div class="feature-item"><div class="feature-dot"></div>Subject-wise result view per student</div>
+        <div class="feature-item"><div class="feature-dot"></div>Pass/fail status &amp; GPA calculation</div>
+        <div class="feature-item"><div class="feature-dot"></div>MySQL database with JDBC connectivity</div>
+        <div class="feature-item"><div class="feature-dot"></div>REST API endpoints via Spring Boot</div>
+      </div>
+      <div class="proj-stack">
+        <span class="tag">Core Java</span>
+        <span class="tag">Spring Boot</span>
+        <span class="tag">JDBC</span>
+        <span class="tag">MySQL</span>
+        <span class="tag">REST API</span>
+        <span class="tag">HTML/CSS</span>
+      </div>
+      <div class="project-links">
+        <a href="#" class="proj-btn primary">Live Demo</a>
+        <a href="#" class="proj-btn">GitHub Repo</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" style="background:var(--surface);">
+  <div class="sec-label">Get In Touch</div>
+  <div class="sec-title">Let's <em>Connect</em></div>
+  <div class="contact-grid">
+    <div>
+      <p class="contact-desc">I'm actively looking for campus placements and internship opportunities. Whether you have a project, a job opening, or just want to connect — I'd love to hear from you!</p>
+      <div class="clinks">
+        <a href="mailto:batturamarao33@gmail.com" class="clink">
+          <div class="clink-ico">✉️</div>
+          <div>
+            <div class="clink-main">batturamarao33@gmail.com</div>
+            <div class="clink-sub">Email — best way to reach me</div>
+          </div>
+        </a>
+        <a href="tel:+919392591707" class="clink">
+          <div class="clink-ico">📱</div>
+          <div>
+            <div class="clink-main">+91 93925 91707</div>
+            <div class="clink-sub">Phone / WhatsApp</div>
+          </div>
+        </a>
+        <a href="https://linkedin.com" class="clink">
+          <div class="clink-ico">💼</div>
+          <div>
+            <div class="clink-main">LinkedIn Profile</div>
+            <div class="clink-sub">Connect professionally</div>
+          </div>
+        </a>
+        <a href="https://github.com" class="clink">
+          <div class="clink-ico">🐙</div>
+          <div>
+            <div class="clink-main">GitHub Profile</div>
+            <div class="clink-sub">View my code &amp; projects</div>
+          </div>
+        </a>
+      </div>
+    </div>
+    <div class="cform">
+      <input type="text" placeholder="Your Name"/>
+      <input type="email" placeholder="Your Email"/>
+      <input type="text" placeholder="Subject (e.g. Internship Opportunity)"/>
+      <textarea placeholder="Your Message..."></textarea>
+      <button class="btn btn-primary" style="align-self:flex-start;">Send Message</button>
+    </div>
+  </div>
+</section>
+
+<footer>Battu Rama Rao · BTech Student · Seshadri Rao Gudlavalleru Engineering College · Open to Placements 2025</footer>
+
+</body>
+</html>
